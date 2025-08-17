@@ -20,9 +20,9 @@ const manrope = Manrope({
 
 export const metadata: Metadata = {
   title: "Elevate AI Solutions - Intelligent AI Solutions for Business Growth",
+  creator: 'Team WAVELOOP',
   description:
     "Transform your business with intelligent AI solutions. Automate repetitive tasks, supercharge marketing, and deliver outstanding customer service.",
-  generator: "v0.app",
 }
 
 export default function RootLayout({
