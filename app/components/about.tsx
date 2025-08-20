@@ -3,12 +3,18 @@ import { ArrowRight, Award, CheckCircle, Clock, Users } from "lucide-react";
 import React from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { SimpleAnimatedSection, SimpleStaggeredList, SimpleCardAnimation } from "@/components/simple-animations";
+import { ShineBorder } from "@/components/magicui/shine-border";
 
 function AboutSection() {
   return (
     <section id="about" className="py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12 md:mb-16">
+        <SimpleAnimatedSection 
+          className="text-center mb-12 md:mb-16"
+          direction="up"
+          duration="0.8s"
+        >
           <h2 className="font-sans text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-4">
             About Elevate AI Solutions
           </h2>
@@ -16,10 +22,14 @@ function AboutSection() {
             We're passionate about helping businesses harness the power of
             artificial intelligence to drive growth, efficiency, and innovation.
           </p>
-        </div>
+        </SimpleAnimatedSection>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-12 md:mb-16">
-          <div className="flex flex-col justify-between order-2 lg:order-1">
+          <SimpleAnimatedSection 
+            className="flex flex-col justify-between order-2 lg:order-1"
+            direction="left"
+            delay={0.2}
+          >
             <div>
               <h3 className="font-sans text-xl sm:text-2xl font-bold text-foreground mb-4 md:mb-6">
                 Our Mission
@@ -37,8 +47,12 @@ function AboutSection() {
                 <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
               </a>
             </Button>
-          </div>
-          <div className="order-1 lg:order-2">
+          </SimpleAnimatedSection>
+          <SimpleAnimatedSection 
+            className="order-1 lg:order-2"
+            delay={0.4}
+            direction="fade"
+          >
             <Image
               src="/banner.png"
               alt="Our team at work"
@@ -46,53 +60,74 @@ function AboutSection() {
               width={500}
               height={400}
             />
-          </div>
+          </SimpleAnimatedSection>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16">
-          <Card className="text-center h-fit">
-            <CardContent className="p-6 md:p-8">
-              <Users className="h-10 w-10 md:h-12 md:w-12 text-primary mx-auto mb-4" />
-              <h3 className="font-sans text-lg md:text-xl font-bold text-foreground mb-2">
-                500+ Clients
-              </h3>
-              <p className="text-sm md:text-base text-muted-foreground">
-                Trusted by businesses across various industries to deliver
-                exceptional AI solutions.
-              </p>
-            </CardContent>
-          </Card>
-          <Card className="text-center h-fit">
-            <CardContent className="p-6 md:p-8">
-              <Award className="h-10 w-10 md:h-12 md:w-12 text-primary mx-auto mb-4" />
-              <h3 className="font-sans text-lg md:text-xl font-bold text-foreground mb-2">
-                98% Success Rate
-              </h3>
-              <p className="text-sm md:text-base text-muted-foreground">
-                Our proven track record of successful AI implementations and
-                satisfied customers.
-              </p>
-            </CardContent>
-          </Card>
-          <Card className="text-center h-fit sm:col-span-2 lg:col-span-1 sm:mx-auto lg:mx-0 sm:max-w-sm lg:max-w-none">
-            <CardContent className="p-6 md:p-8">
-              <Clock className="h-10 w-10 md:h-12 md:w-12 text-primary mx-auto mb-4" />
-              <h3 className="font-sans text-lg md:text-xl font-bold text-foreground mb-2">
-                5+ Years Experience
-              </h3>
-              <p className="text-sm md:text-base text-muted-foreground">
-                Deep expertise in AI development and implementation across
-                multiple industries.
-              </p>
-            </CardContent>
-          </Card>
-        </div>
+        <SimpleStaggeredList 
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16"
+          staggerDelay={0.15}
+          direction="up"
+        >
+          <SimpleCardAnimation delay={0} enableHover={true}>
+            <Card className="text-center h-fit">
+              <ShineBorder shineColor={["#44A6E9", "#ffffff", "#44A6E9"]} className="z-10" />
+              <CardContent className="p-6 md:p-8">
+                <Users className="h-10 w-10 md:h-12 md:w-12 text-primary mx-auto mb-4" />
+                <h3 className="font-sans text-lg md:text-xl font-bold text-foreground mb-2">
+                  500+ Clients
+                </h3>
+                <p className="text-sm md:text-base text-muted-foreground">
+                  Trusted by businesses across various industries to deliver
+                  exceptional AI solutions.
+                </p>
+              </CardContent>
+            </Card>
+          </SimpleCardAnimation>
+          <SimpleCardAnimation delay={0.1} enableHover={true}>
+            <Card className="text-center h-fit">
+              <ShineBorder shineColor={["#44A6E9", "#ffffff", "#44A6E9"]} className="z-10" />
+              <CardContent className="p-6 md:p-8">
+                <Award className="h-10 w-10 md:h-12 md:w-12 text-primary mx-auto mb-4" />
+                <h3 className="font-sans text-lg md:text-xl font-bold text-foreground mb-2">
+                  98% Success Rate
+                </h3>
+                <p className="text-sm md:text-base text-muted-foreground">
+                  Our proven track record of successful AI implementations and
+                  satisfied customers.
+                </p>
+              </CardContent>
+            </Card>
+          </SimpleCardAnimation>
+          <SimpleCardAnimation delay={0.2} enableHover={true}>
+            <Card className="text-center h-fit sm:col-span-2 lg:col-span-1 sm:mx-auto lg:mx-0 sm:max-w-sm lg:max-w-none">
+              <ShineBorder shineColor={["#44A6E9", "#ffffff", "#44A6E9"]} className="z-10" />
+              <CardContent className="p-6 md:p-8">
+                <Clock className="h-10 w-10 md:h-12 md:w-12 text-primary mx-auto mb-4" />
+                <h3 className="font-sans text-lg md:text-xl font-bold text-foreground mb-2">
+                  5+ Years Experience
+                </h3>
+                <p className="text-sm md:text-base text-muted-foreground">
+                  Deep expertise in AI development and implementation across
+                  multiple industries.
+                </p>
+              </CardContent>
+            </Card>
+          </SimpleCardAnimation>
+        </SimpleStaggeredList>
 
-        <div className="bg-muted/30 rounded-lg p-6 md:p-8">
+        <SimpleAnimatedSection 
+          className="bg-muted/30 rounded-lg p-6 md:p-8"
+          direction="up"
+          delay={0.3}
+        >
           <h3 className="font-sans text-xl sm:text-2xl font-bold text-foreground mb-6 text-center">
             Why Choose Elevate AI Solutions?
           </h3>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
+          <SimpleStaggeredList 
+            className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6"
+            staggerDelay={0.1}
+            direction="left"
+          >
             <div className="flex items-start space-x-3">
               <CheckCircle className="h-5 w-5 md:h-6 md:w-6 text-secondary mt-1 flex-shrink-0" />
               <div>
@@ -141,8 +176,8 @@ function AboutSection() {
                 </p>
               </div>
             </div>
-          </div>
-        </div>
+          </SimpleStaggeredList>
+        </SimpleAnimatedSection>
       </div>
     </section>
   );

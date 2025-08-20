@@ -3,19 +3,22 @@ import SolutionSection from "./components/solutions";
 import AboutSection from "./components/about";
 import FQASection from "./components/faq";
 import ContactSection from "./components/contact";
+import { PageTransition } from "@/components/page-transition";
 
 export default function HomePage() {
   return (
-    <div className="bg-background">
-      <HeroSection />
+    <PageTransition>
+      <div className="bg-background">
+        <HeroSection />
 
-      <SolutionSection />
+        <SolutionSection />
 
-      <AboutSection />
+        <AboutSection />
 
-      <FQASection />
+        <FQASection />
 
-      <ContactSection />
-    </div>
+        <ContactSection />
+      </div>
+    </PageTransition>
   );
 }

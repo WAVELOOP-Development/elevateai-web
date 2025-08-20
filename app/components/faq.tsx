@@ -1,20 +1,31 @@
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import React from "react";
+import { AnimatedSection } from "@/components/animated-section";
+import { StaggeredList } from "@/components/animated-components";
 
 function FQASection() {
   return (
     <section id="faq" className="py-8 sm:py-12 md:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
       <div className="max-w-4xl lg:max-w-6xl mx-auto">
-        <div className="text-center mb-8 sm:mb-12 md:mb-16">
+        <AnimatedSection 
+          className="text-center mb-8 sm:mb-12 md:mb-16"
+          direction="up"
+          duration={0.8}
+        >
           <h2 className="font-sans text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-2 sm:mb-4">
             Frequently Asked Questions
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground px-2 sm:px-4">
             Get answers to common questions about our AI solutions and services
           </p>
-        </div>
+        </AnimatedSection>
 
-        <Accordion type="single" collapsible className="w-full space-y-2 sm:space-y-4">
+        <StaggeredList
+          className="w-full space-y-2 sm:space-y-4"
+          staggerDelay={0.1}
+          direction="up"
+        >
+          <Accordion className="gap-4 flex flex-col pb-2" type="single" collapsible>
           <AccordionItem value="item-1" className="border border-border rounded-lg px-3 sm:px-4 md:px-6">
             <AccordionTrigger className="font-sans text-sm sm:text-base md:text-lg font-semibold py-3 sm:py-4">
               How long does it take to implement an AI solution?
@@ -116,6 +127,7 @@ function FQASection() {
             </AccordionContent>
           </AccordionItem>
         </Accordion>
+        </StaggeredList>
       </div>
       
     </section>

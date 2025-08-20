@@ -1,47 +1,102 @@
-import LightRays from "@/components/rays-origin";
-import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+"use client";
+
 import React from "react";
+import { TextAnimate } from "@/components/magicui/text-animate";
+import { cn } from "@/lib/utils";
+import { AnimatedGradientText } from "@/components/magicui/animated-gradient-text";
+import { ChevronRight } from "lucide-react";
+import { AnimatedShinyText } from "@/components/magicui/animated-shiny-text";
+import { ShineBorder } from "@/components/magicui/shine-border";
+import { WarpBackground } from "@/components/magicui/warp-background";
 
 function HeroSection() {
   return (
-    <div className="h-screen">
-      <section
-        id="home"
-        className="absolute z-10 flex w-full pt-24 pb-16 px-4 h-screen sm:px-6 lg:px-8 "
-      >
-        <div className="max-w-7xl m-auto">
-          <div className="text-center max-w-4xl mx-auto">
-            <h1 className="font-sans text-4xl md:text-6xl font-bold text-foreground leading-tight">
-              Intelligent{" "}
-              <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent bg-[length:200%_200%] animate-[gradient_3s_ease-in-out_infinite]">
-                AI
-              </span>{" "}
-              Solutions for
-              <br />
-              <span className="text-primary">Business Growth</span>
-            </h1>
-            <p className="text-md md:text-lg lg:text-xl text-muted-foreground mb-12 leading-relaxed">
-              Our AI solutions help businesses grow and save time by automating
-              tasks, improving marketing, and enhancing customer service.
-            </p>
-            <div className="flex flex-col lg:flex-row gap-4 justify-center">
-              <Button size="lg" className="text-lg px-8 py-6" asChild>
-                <a href="#solutions">
-                  See Our Solutions
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </a>
-              </Button>
-              <Button size="lg" className="text-lg px-8 py-6 bg-background border border-foreground text-foreground hover:bg-gray-800" asChild>
-                <a href="#contact">
-                  Contact Us
-                </a>
-              </Button>
+    <>
+      <div className="h-screen w-full">
+        <WarpBackground
+          colors={["#38bdf8", "#818cf8", "#c084fc", "#e879f9", "#22d3ee"]}
+          backgroundFill="rgb(15, 23, 42)"
+          className="flex flex-col items-center justify-center text-center"
+          containerClassName="h-full"
+        >
+          <div className="max-w-7x m-auto mx-4 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border border-gray-600 rounded-2xl">
+            <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} />
+            <div className="text-center max-w-4xl p-8 mx-auto ">
+              <h1 className="font-sans text-4xl md:text-6xl font-bold text-foreground leading-tight">
+                <TextAnimate animation="slideLeft" by="word" once>
+                  Intelligent AI Solutions for
+                </TextAnimate>
+                <TextAnimate
+                  animation="slideLeft"
+                  by="word"
+                  once
+                  className="text-primary"
+                >
+                  Business Growth
+                </TextAnimate>
+              </h1>
+              <TextAnimate
+                animation="fadeIn"
+                by="line"
+                as="p"
+                once
+                delay={0.5}
+                className="text-md md:text-lg lg:text-xl text-muted-foreground mb-12 leading-relaxed"
+              >
+                Our AI solutions help businesses and save time by automating
+                tasks, improving marketing, and enhancing customer service.
+              </TextAnimate>
+              <div className="flex justify-center items-center flex-col lg:flex-row gap-4">
+                <div className="group relative cursor-pointer w-fit flex items-center justify-center rounded-md px-4 py-4 shadow-[inset_0_-8px_10px_#8fdfff1f] transition-shadow duration-500 ease-out hover:shadow-[inset_0_-5px_10px_#8fdfff3f] ">
+                  <span
+                    className={cn(
+                      "absolute inset-0 block h-full animate-gradient rounded-[inherit] bg-gradient-to-r from-[#ffaa40]/50 via-[#9c40ff]/50 to-[#ffaa40]/50 bg-[length:300%_100%] p-[1px]"
+                    )}
+                    style={{
+                      WebkitMask:
+                        "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                      WebkitMaskComposite: "destination-out",
+                      mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                      maskComposite: "subtract",
+                      WebkitClipPath: "padding-box",
+                    }}
+                  />
+                  <AnimatedGradientText className="text-lg font-medium">
+                    See Our Solutions
+                  </AnimatedGradientText>
+                  <ChevronRight
+                    className="ml-1 size-4 stroke-neutral-500 transition-transform
+                     duration-300 ease-in-out group-hover:translate-x-0.5"
+                  />
+                </div>
+                <div className="group relative cursor-pointer w-fit flex items-center justify-center rounded-md px-4 py-4 shadow-[inset_0_-8px_10px_#8fdfff1f] transition-shadow duration-500 ease-out hover:shadow-[inset_0_-5px_10px_#8fdfff3f] ">
+                  <span
+                    className={cn(
+                      "absolute inset-0 block h-full w-full animate-gradient rounded-[inherit] bg-gradient-to-r from-[#ffffff]/50 via-[#ffffff] to-[#ffffff]/50 bg-[length:300%_100%] p-[1px]"
+                    )}
+                    style={{
+                      WebkitMask:
+                        "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                      WebkitMaskComposite: "destination-out",
+                      mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                      maskComposite: "subtract",
+                      WebkitClipPath: "padding-box",
+                    }}
+                  />
+                  <AnimatedShinyText className="inline-flex items-center justify-center transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
+                    <span>Get Start Today</span>
+                  </AnimatedShinyText>
+                  <ChevronRight
+                    className="ml-1 size-4 stroke-neutral-500 transition-transform
+                     duration-300 ease-in-out group-hover:translate-x-0.5"
+                  />
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-    </div>
+        </WarpBackground>
+      </div>
+    </>
   );
 }
 
