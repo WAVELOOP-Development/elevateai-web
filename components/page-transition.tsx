@@ -40,7 +40,7 @@ export function PageTransition({ children }: PageTransitionProps) {
       }}
       onAnimationComplete={() => {
         // Ensure we're at the top after animation completes
-        window.scrollTo(0, 0);
+        //window.scrollTo(0, 0);
       }}
     >
       {children}

@@ -74,7 +74,7 @@ function AboutSection() {
               <CardContent className="p-6 md:p-8">
                 <Users className="h-10 w-10 md:h-12 md:w-12 text-primary mx-auto mb-4" />
                 <h3 className="font-sans text-lg md:text-xl font-bold text-foreground mb-2">
-                  500+ Clients
+                  20+ Clients
                 </h3>
                 <p className="text-sm md:text-base text-muted-foreground">
                   Trusted by businesses across various industries to deliver
@@ -89,7 +89,7 @@ function AboutSection() {
               <CardContent className="p-6 md:p-8">
                 <Award className="h-10 w-10 md:h-12 md:w-12 text-primary mx-auto mb-4" />
                 <h3 className="font-sans text-lg md:text-xl font-bold text-foreground mb-2">
-                  98% Success Rate
+                  100% Success Rate
                 </h3>
                 <p className="text-sm md:text-base text-muted-foreground">
                   Our proven track record of successful AI implementations and
@@ -104,7 +104,7 @@ function AboutSection() {
               <CardContent className="p-6 md:p-8">
                 <Clock className="h-10 w-10 md:h-12 md:w-12 text-primary mx-auto mb-4" />
                 <h3 className="font-sans text-lg md:text-xl font-bold text-foreground mb-2">
-                  5+ Years Experience
+                  2+ Years Experience
                 </h3>
                 <p className="text-sm md:text-base text-muted-foreground">
                   Deep expertise in AI development and implementation across

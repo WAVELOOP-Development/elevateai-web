@@ -36,19 +36,19 @@ function SolutionSection() {
         </AnimatedSection>
 
         <AnimatedSection
-          className="space-y-6 sm:space-y-8"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8"
           direction="up"
           staggerChildren={0.2}
         >
           {/* Retail & E-commerce */}
 
           <Link href="/solutions/retail-ecommerce">
-            <div className="relative cursor-pointer h-fit hover:shadow-lg transition-shadow duration-300 mb-8 group overflow-hidden rounded-lg">
+            <div className="relative cursor-pointer h-fit hover:shadow-lg transition-shadow duration-300 group overflow-hidden rounded-lg">
               <ShineBorder shineColor={["#44A6E9", "#ffffff", "#44A6E9"]} className="z-10" />
               <Card className="h-full border-0 relative z-0">
                 <CardContent className="p-0">
-                  <div className="flex flex-col md:flex-row md:min-h-[300px]">
-                    <div className="w-full md:w-1/3 h-48 md:h-auto relative overflow-hidden">
+                  <div className="flex flex-col md:min-h-[300px]">
+                    <div className="w-full  h-48  relative overflow-hidden">
                       <div className="relative w-full h-full hover:scale-105 transition-transform duration-300">
                         <video
                           src="/retail-e-commerce-1.mp4"
@@ -61,7 +61,7 @@ function SolutionSection() {
                         </video>
                       </div>
                     </div>
-                    <div className="w-full md:w-2/3 p-4 sm:p-6 lg:p-8 flex flex-col justify-center">
+                    <div className="w-full  p-6 lg:p-8 flex flex-col justify-center">
                       <div className="flex items-center space-x-3 mb-3 sm:mb-4">
                         <ShoppingCart className="h-6 w-6 sm:h-8 sm:w-8 text-primary flex-shrink-0" />
                         <h3 className="font-sans text-xl sm:text-2xl font-bold text-foreground group-hover:text-primary transition-colors">
@@ -112,12 +112,12 @@ function SolutionSection() {
 
           {/* Tourism & Hospitality */}
           <Link href="/solutions/tourism-hospitality">
-            <div className="relative cursor-pointer h-fit hover:shadow-lg transition-shadow mb-8 duration-300 group overflow-hidden rounded-lg">
+            <div className="relative cursor-pointer h-fit hover:shadow-lg transition-shadow duration-300 group overflow-hidden rounded-lg">
               <ShineBorder shineColor={["#44A6E9", "#ffffff", "#44A6E9"]} className="z-10" />
               <Card className="h-full border-0 relative z-0">
                 <CardContent className="p-0">
-                  <div className="flex flex-col md:flex-row md:min-h-[300px]">
-                    <div className="lg:hidden block w-full md:w-1/3 h-48 md:h-auto relative md:order-2 overflow-hidden">
+                  <div className="flex flex-col md:min-h-[300px]">
+                    <div className="w-full  h-48  relative overflow-hidden">
                       <div className="relative w-full h-full">
                         <video
                           src="/tourism-hospitality-1.mp4"
@@ -130,7 +130,7 @@ function SolutionSection() {
                         </video>
                       </div>
                     </div>
-                  <div className="w-full md:w-2/3 p-4 sm:p-6 lg:p-8 flex flex-col justify-center md:order-1">
+                  <div className="w-full p-6 lg:p-8 flex flex-col justify-center md:order-1">
                     <div className="flex items-center space-x-3 mb-3 sm:mb-4">
                       <MapPin className="h-6 w-6 sm:h-8 sm:w-8 text-primary flex-shrink-0" />
                       <h3 className="font-sans text-xl sm:text-2xl font-bold text-foreground group-hover:text-primary transition-colors">
@@ -173,19 +173,6 @@ function SolutionSection() {
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </div>
                   </div>
-                  <div className="hidden lg:block w-full md:w-1/3 h-48 md:h-auto relative md:order-2 overflow-hidden">
-                    <div className="relative w-full h-full">
-                      <video
-                        src="/tourism-hospitality-1.mp4"
-                        autoPlay
-                        loop
-                        muted
-                        className="w-full h-full object-cover"
-                      >
-                        Your browser does not support the video tag.
-                      </video>
-                    </div>
-                  </div>
                 </div>
               </CardContent>
             </Card>
@@ -194,12 +181,12 @@ function SolutionSection() {
 
           {/* Real Estate */}
           <Link href="/solutions/real-estate">
-            <div className="relative cursor-pointer h-fit hover:shadow-lg transition-shadow mb-8 duration-300 group overflow-hidden rounded-lg">
+            <div className="relative cursor-pointer h-fit hover:shadow-lg transition-shadow duration-300 group overflow-hidden rounded-lg">
              <ShineBorder shineColor={["#44A6E9", "#ffffff", "#44A6E9"]} className="z-10" />
               <Card className="h-full border-0 relative z-0">
                 <CardContent className="p-0">
-                  <div className="flex flex-col md:flex-row md:min-h-[300px]">
-                    <div className="w-full md:w-1/3 h-48 md:h-auto relative overflow-hidden">
+                  <div className="flex flex-col md:min-h-[300px]">
+                    <div className="w-full h-48 relative overflow-hidden">
                       <div className="relative w-full h-full hover:scale-105 transition-transform duration-300">
                         <video
                           src="/real-estate-2.mp4"
@@ -212,7 +199,7 @@ function SolutionSection() {
                         </video>
                       </div>
                     </div>
-                  <div className="w-full md:w-2/3 p-4 sm:p-6 lg:p-8 flex flex-col justify-center">
+                  <div className="w-full p-6 lg:p-8 flex flex-col justify-center">
                     <div className="flex items-center space-x-3 mb-3 sm:mb-4">
                       <Home className="h-6 w-6 sm:h-8 sm:w-8 text-primary flex-shrink-0" />
                       <h3 className="font-sans text-xl sm:text-2xl font-bold text-foreground group-hover:text-primary transition-colors">
@@ -263,12 +250,12 @@ function SolutionSection() {
 
           {/* Professional Services */}
           <Link href="/solutions/professional-services">
-            <div className="relative cursor-pointer h-fit hover:shadow-lg transition-shadow mb-8 duration-300 group overflow-hidden rounded-lg">
+            <div className="relative cursor-pointer h-full hover:shadow-lg transition-shadow duration-300 group overflow-hidden rounded-lg">
               <ShineBorder shineColor={["#44A6E9", "#ffffff", "#44A6E9"]} className="z-10" />
               <Card className="h-full border-0 relative z-0">
                 <CardContent className="p-0">
-                  <div className="flex flex-col md:flex-row md:min-h-[300px]">
-                    <div className="block lg:hidden w-full md:w-1/3 h-48 md:h-auto relative md:order-2 overflow-hidden">
+                  <div className="flex flex-col md:min-h-[300px]">
+                    <div className="w-full h-48 relative overflow-hidden">
                       <div className="relative w-full h-full">
                         <video
                           src="/professional-services-1.mp4"
@@ -281,7 +268,7 @@ function SolutionSection() {
                         </video>
                       </div>
                     </div>
-                  <div className="w-full md:w-2/3 p-4 sm:p-6 lg:p-8 flex flex-col justify-center md:order-1">
+                  <div className="w-full p-6 lg:p-8 flex flex-col justify-center md:order-1">
                     <div className="flex items-center space-x-3 mb-3 sm:mb-4">
                       <Briefcase className="h-6 w-6 sm:h-8 sm:w-8 text-primary flex-shrink-0" />
                       <h3 className="font-sans text-xl sm:text-2xl font-bold text-foreground group-hover:text-primary transition-colors">
@@ -323,19 +310,7 @@ function SolutionSection() {
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </div>
                   </div>
-                  <div className="hidden lg:block w-full md:w-1/3 h-48 md:h-auto relative md:order-2 overflow-hidden">
-                    <div className="relative w-full h-full">
-                      <video
-                        src="/professional-services-1.mp4"
-                        autoPlay
-                        loop
-                        muted
-                        className="w-full h-full object-cover"
-                      >
-                        Your browser does not support the video tag.
-                      </video>
-                    </div>
-                  </div>
+
                 </div>
               </CardContent>
             </Card>
@@ -343,7 +318,7 @@ function SolutionSection() {
           </Link>
 
           {/* Healthcare & Wellness */}
-          <Link href="/solutions/healthcare-wellness">
+          <Link href="/solutions/healthcare-wellness" className="lg:col-span-2">
             <div className="relative cursor-pointer h-fit hover:shadow-lg transition-shadow duration-300 group overflow-hidden rounded-lg">
               <ShineBorder shineColor={["#44A6E9", "#ffffff", "#44A6E9"]} className="z-10" />
               <Card className="h-full border-0 relative z-0">
