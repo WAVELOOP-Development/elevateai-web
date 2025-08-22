@@ -21,10 +21,16 @@ import {
   Send,
   Clock,
   Calendar,
+  AlertCircle,
 } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { SimpleAnimatedSection, SimpleStaggeredList, SimpleCardAnimation } from "@/components/simple-animations";
+import {
+  SimpleAnimatedSection,
+  SimpleStaggeredList,
+  SimpleCardAnimation,
+} from "@/components/simple-animations";
+import axios from "axios";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -37,18 +43,23 @@ export default function ContactPage() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [showBookingForm, setShowBookingForm] = useState(false);
+  const [bookingName, setBookingName] = useState("");
+
   const [bookingEmail, setBookingEmail] = useState("");
+
   const [isBookingSubmitting, setIsBookingSubmitting] = useState(false);
   const [isBookingSubmitted, setIsBookingSubmitted] = useState(false);
+  const [bookingError, setBookingError] = useState<string | null>(null);
 
   // Prevent any automatic scrolling behavior
   useEffect(() => {
     // Prevent scroll restoration
-    if (typeof window !== 'undefined') {
-      window.history.scrollRestoration = 'manual';
+    if (typeof window !== "undefined") {
+      window.history.scrollRestoration = "manual";
     }
-    
+
     // Ensure the page stays at the top on initial load
     const handleLoad = () => {
       window.scrollTo(0, 0);
@@ -56,15 +67,15 @@ export default function ContactPage() {
 
     // Set initial scroll position
     window.scrollTo(0, 0);
-    
+
     // Add event listener for load
-    window.addEventListener('load', handleLoad);
-    
+    window.addEventListener("load", handleLoad);
+
     return () => {
-      window.removeEventListener('load', handleLoad);
+      window.removeEventListener("load", handleLoad);
       // Restore default scroll restoration when component unmounts
-      if (typeof window !== 'undefined') {
-        window.history.scrollRestoration = 'auto';
+      if (typeof window !== "undefined") {
+        window.history.scrollRestoration = "auto";
       }
     };
   }, []);
@@ -74,45 +85,174 @@ export default function ContactPage() {
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+
+    // Clear any existing error when user starts typing
+    if (submitError) {
+      setSubmitError(null);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitError(null);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    try {
+      // Prepare the request body according to the API specification
+      const requestBody = {
+        f_name: formData.firstName,
+        l_name: formData.lastName,
+        email: formData.email,
+        phone: formData.phone,
+        company: formData.company,
+        message: formData.message,
+      };
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+      // Send the HTTP request to the endpoint
+      const response = await axios.post(
+        "https://us-central1-elevateai-solutions.cloudfunctions.net/contact",
+        requestBody,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          timeout: 10000, // 10 second timeout
+        }
+      );
+
+      // Check if the response indicates success
+      if (response.data && response.data.success) {
+        setIsSubmitted(true);
+        // Reset form data
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          company: "",
+          phone: "",
+          message: "",
+        });
+      } else {
+        throw new Error(response.data?.message || "Failed to send message");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+
+      if (axios.isAxiosError(error)) {
+        if (error.code === "ECONNABORTED") {
+          setSubmitError("Request timed out. Please try again.");
+        } else if (error.response?.status === 429) {
+          setSubmitError(
+            "Too many requests. Please wait a moment and try again."
+          );
+        } else if (error.response && error.response.status >= 500) {
+          setSubmitError("Server error. Please try again later.");
+        } else if (error.response?.data?.message) {
+          setSubmitError(error.response.data.message);
+        } else {
+          setSubmitError(
+            "Failed to send message. Please check your connection and try again."
+          );
+        }
+      } else {
+        setSubmitError("An unexpected error occurred. Please try again.");
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleBookingSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsBookingSubmitting(true);
+    setBookingError(null);
 
-    // Simulate booking submission
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    try {
+      // Prepare the request body according to the API specification
+      const requestBody = {
+        name: bookingName,
+        email: bookingEmail,
+      };
 
-    setIsBookingSubmitting(false);
-    setIsBookingSubmitted(true);
+      // Send the HTTP request to the consultation endpoint
+      const response = await axios.post(
+        "https://us-central1-elevateai-solutions.cloudfunctions.net/consultation",
+        requestBody,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          timeout: 10000, // 10 second timeout
+        }
+      );
+
+      // Check if the response indicates success
+      if (response.data && response.data.success) {
+        setIsBookingSubmitted(true);
+        // Reset form data
+        setBookingName("");
+        setBookingEmail("");
+      } else {
+        throw new Error(response.data?.message || "Failed to submit consultation request");
+      }
+    } catch (error) {
+      console.error("Error submitting consultation request:", error);
+
+      if (axios.isAxiosError(error)) {
+        if (error.code === "ECONNABORTED") {
+          setBookingError("Request timed out. Please try again.");
+        } else if (error.response?.status === 429) {
+          setBookingError(
+            "Too many requests. Please wait a moment and try again."
+          );
+        } else if (error.response && error.response.status >= 500) {
+          setBookingError("Server error. Please try again later.");
+        } else if (error.response?.data?.message) {
+          setBookingError(error.response.data.message);
+        } else {
+          setBookingError(
+            "Failed to submit consultation request. Please check your connection and try again."
+          );
+        }
+      } else {
+        setBookingError("An unexpected error occurred. Please try again.");
+      }
+    } finally {
+      setIsBookingSubmitting(false);
+    }
+  };
+
+  const handleBookingInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { name, value } = e.target;
+    if (name === "bookingName") {
+      setBookingName(value);
+    } else if (name === "bookingEmail") {
+      setBookingEmail(value);
+    }
+
+    // Clear any existing error when user starts typing
+    if (bookingError) {
+      setBookingError(null);
+    }
   };
 
   const handleBookNowClick = () => {
     setShowBookingForm(true);
   };
   return (
-    <div 
-      className="min-h-screen bg-gradient-to-br from-background to-muted/20" 
-      style={{ 
-        scrollBehavior: 'auto',
-        overflowAnchor: 'none' // Prevent scroll anchoring
+    <div
+      className="min-h-screen bg-gradient-to-br from-background to-muted/20"
+      style={{
+        scrollBehavior: "auto",
+        overflowAnchor: "none", // Prevent scroll anchoring
       }}
     >
       {/* Hero Section */}
       <section className="pt-36 pb-8 sm:pb-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
-          <SimpleAnimatedSection 
+          <SimpleAnimatedSection
             className="text-center mb-8 sm:mb-12"
             direction="up"
             delay={0}
@@ -127,7 +267,7 @@ export default function ContactPage() {
           </SimpleAnimatedSection>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
             {/* Contact Form */}
-            <SimpleAnimatedSection 
+            <SimpleAnimatedSection
               className="relative rounded-xl"
               direction="left"
               delay={0.2}
@@ -155,6 +295,8 @@ export default function ContactPage() {
                       </h3>
                       <p className="text-muted-foreground">
                         Thank you for reaching out. We'll be in touch soon.
+                        <br />
+                        Check your email for confirmation.
                       </p>
                     </div>
                   ) : (
@@ -162,6 +304,16 @@ export default function ContactPage() {
                       onSubmit={handleSubmit}
                       className="space-y-4 sm:space-y-6"
                     >
+                      {submitError && (
+                        <div className="bg-red-50 border border-red-200 rounded-md p-4 mb-4">
+                          <div className="flex items-center">
+                            <AlertCircle className="h-4 w-4 text-red-500 mr-2" />
+                            <p className="text-sm text-red-600">
+                              {submitError}
+                            </p>
+                          </div>
+                        </div>
+                      )}
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-2">
                           <Input
@@ -248,7 +400,7 @@ export default function ContactPage() {
             </SimpleAnimatedSection>
 
             {/* Contact Information */}
-            <SimpleAnimatedSection 
+            <SimpleAnimatedSection
               className="space-y-6 sm:space-y-8"
               direction="right"
               delay={0.4}
@@ -264,7 +416,7 @@ export default function ContactPage() {
                 </p>
               </div>
 
-              <SimpleStaggeredList 
+              <SimpleStaggeredList
                 className="space-y-4 sm:space-y-6"
                 staggerDelay={0.1}
                 direction="up"
@@ -341,11 +493,7 @@ export default function ContactPage() {
               </SimpleStaggeredList>
             </SimpleAnimatedSection>
           </div>
-          <SimpleAnimatedSection 
-            className="relative rounded-xl"
-            direction="up"
-            delay={0.6}
-          >
+          <div className="relative rounded-xl">
             <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} />
             <Card className="bg-gradient-to-r mt-8 w-full from-primary/5 to-primary/10 border-primary/20">
               <CardContent className="p-4 sm:p-6">
@@ -376,16 +524,36 @@ export default function ContactPage() {
                           reach out to confirm your appointment.
                         </p>
                       </div>
-                    ) : showBookingForm ? (
+                    ) : (
                       <form
                         onSubmit={handleBookingSubmit}
                         className="mt-6 space-y-4"
                       >
+                        {bookingError && (
+                          <div className="bg-red-50 border border-red-200 rounded-md p-3">
+                            <div className="flex items-center">
+                              <AlertCircle className="h-4 w-4 text-red-500 mr-2" />
+                              <p className="text-sm text-red-600">
+                                {bookingError}
+                              </p>
+                            </div>
+                          </div>
+                        )}
                         <div className="space-y-2">
                           <Input
+                            type="text"
+                            name="bookingName"
+                            value={bookingName}
+                            onChange={handleBookingInputChange}
+                            placeholder="Enter your name"
+                            className="w-full border hover:border-primary transition-all border-muted-foreground/30 rounded-md shadow-sm focus:border-primary focus:ring focus:ring-primary/50"
+                            required
+                          />
+                          <Input
                             type="email"
+                            name="bookingEmail"
                             value={bookingEmail}
-                            onChange={(e) => setBookingEmail(e.target.value)}
+                            onChange={handleBookingInputChange}
                             placeholder="Enter your email address"
                             className="w-full border hover:border-primary transition-all border-muted-foreground/30 rounded-md shadow-sm focus:border-primary focus:ring focus:ring-primary/50"
                             required
@@ -406,19 +574,12 @@ export default function ContactPage() {
                           )}
                         </Button>
                       </form>
-                    ) : (
-                      <Button
-                        onClick={handleBookNowClick}
-                        className="w-fit mt-6 cursor-pointer"
-                      >
-                        Book Now
-                      </Button>
                     )}
                   </div>
                 </div>
               </CardContent>
             </Card>
-          </SimpleAnimatedSection>
+          </div>
         </div>
       </section>
     </div>

@@ -9,6 +9,7 @@ import { ChevronRight } from "lucide-react";
 import { AnimatedShinyText } from "@/components/magicui/animated-shiny-text";
 import { ShineBorder } from "@/components/magicui/shine-border";
 import { WarpBackground } from "@/components/magicui/warp-background";
+import { ChatWidgetButton } from "@/components/chat";
 import Link from "next/link";
 
 // Typing animation data
@@ -69,39 +70,41 @@ function HeroSection() {
                 />
               </div>
               <div className="flex justify-center items-center flex-col gap-4">
-                <div
-                  className="group relative cursor-pointer w-fit flex items-center justify-center rounded-md px-8 py-4 hover:scale-105 transition-transform duration-300 ease-in-out"
-                  onClick={() => {
-                    document.getElementById("solutions")?.scrollIntoView({
-                      behavior: "smooth",
-                    });
-                  }}
-                >
-                  <span
-                    className={cn(
-                      "absolute inset-0 block h-full animate-gradient rounded-[inherit] bg-gradient-to-r from-[#ffaa40]/50 via-[#9c40ff]/50 to-[#ffaa40]/50 bg-[length:300%_100%] p-[2px]"
-                    )}
-                    style={{
-                      WebkitMask:
-                        "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                      WebkitMaskComposite: "destination-out",
-                      mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                      maskComposite: "subtract",
-                      WebkitClipPath: "padding-box",
+                <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
+                  <div
+                    className="group relative cursor-pointer w-fit flex items-center justify-center rounded-md px-8 py-4 hover:scale-105 transition-transform duration-300 ease-in-out"
+                    onClick={() => {
+                      document.getElementById("solutions")?.scrollIntoView({
+                        behavior: "smooth",
+                      });
                     }}
-                  />
-                  <AnimatedGradientText className="text-lg font-medium">
-                    See Our Solutions
-                  </AnimatedGradientText>
-                  <ChevronRight
-                    className="ml-1 size-4 stroke-neutral-500 transition-transform
-                     duration-300 ease-in-out group-hover:translate-x-0.5"
-                  />
+                  >
+                    <span
+                      className={cn(
+                        "absolute inset-0 block h-full animate-gradient rounded-[inherit] bg-gradient-to-r from-[#ffaa40]/50 via-[#9c40ff]/50 to-[#ffaa40]/50 bg-[length:300%_100%] p-[2px]"
+                      )}
+                      style={{
+                        WebkitMask:
+                          "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                        WebkitMaskComposite: "destination-out",
+                        mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                        maskComposite: "subtract",
+                        WebkitClipPath: "padding-box",
+                      }}
+                    />
+                    <AnimatedGradientText className="text-lg font-medium">
+                      See Our Solutions
+                    </AnimatedGradientText>
+                    <ChevronRight
+                      className="ml-1 size-4 stroke-neutral-500 transition-transform
+                       duration-300 ease-in-out group-hover:translate-x-0.5"
+                    />
+                  </div>
                 </div>
                 <Link href="/contact">
                   <div className="group relative cursor-pointer w-fit flex items-center justify-center rounded-md px-4 py-4">
                     <AnimatedShinyText className="inline-flex items-center justify-center transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
-                      <span>Start Growing Your Business with Us Today</span>
+                      Contact Us today
                     </AnimatedShinyText>
                     <ChevronRight
                       className="ml-1 size-4 stroke-neutral-500 transition-transform

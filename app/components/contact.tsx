@@ -5,6 +5,7 @@ import React from "react";
 import { SimpleAnimatedSection } from "@/components/simple-animations";
 import { WarpBackground } from "@/components/magicui/warp-background";
 import { ShineBorder } from "@/components/magicui/shine-border";
+import { ChatWidgetButton } from "@/components/chat";
 
 function ContactSection() {
   return (
@@ -26,19 +27,29 @@ function ContactSection() {
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-6 sm:mb-8 lg:mb-10 max-w-3xl mx-auto leading-relaxed">
             Transform your business with AI solutions tailored to your needs
           </p>
-          <div className="hover:scale-105 transition-transform duration-300">
-            <Button
-              size="lg"
-              className="text-sm sm:text-base md:text-lg px-6 py-4 sm:px-8 sm:py-6 w-full sm:w-auto transition-all duration-300"
-              asChild
-            >
-              <Link href="/contact">
+          <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
+            <div className="hover:scale-105 transition-transform duration-300">
+              <Button
+                size="lg"
+                className="text-sm sm:text-base md:text-lg px-6 py-4 sm:px-8 sm:py-6 w-full sm:w-auto transition-all duration-300"
+                asChild
+              >
+                <Link href="/contact">
+                  <span className="block sm:inline">
+                    Begin your business growth journey today
+                  </span>
+                  <ArrowRight className="ml-0 sm:ml-2 mt-1 sm:mt-0 h-4 w-4 sm:h-5 sm:w-5 mx-auto sm:mx-0" />
+                </Link>
+              </Button>
+            </div>
+            
+            <div className="hover:scale-105 transition-transform duration-300">
+              <ChatWidgetButton className="text-sm sm:text-base md:text-lg px-6 py-4 sm:px-8 sm:py-6 w-full sm:w-auto">
                 <span className="block sm:inline">
-                  Begin your business growth journey today
+                  Chat with our AI Assistant
                 </span>
-                <ArrowRight className="ml-0 sm:ml-2 mt-1 sm:mt-0 h-4 w-4 sm:h-5 sm:w-5 mx-auto sm:mx-0" />
-              </Link>
-            </Button>
+              </ChatWidgetButton>
+            </div>
           </div>
         </SimpleAnimatedSection>
       </section>

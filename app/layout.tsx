@@ -5,6 +5,7 @@ import "./globals.css"
 import Header from './components/header';
 import { ThemeProvider } from "@/components/theme-provider"
 import Footer from "./components/footer";
+import { ChatProvider, ChatInterface } from "@/components/chat";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -39,9 +40,12 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
-          {children}
-          <Footer />
+          <ChatProvider>
+            <Header />
+            {children}
+            <Footer />
+            <ChatInterface />
+          </ChatProvider>
         </ThemeProvider>
       </body>
     </html>
